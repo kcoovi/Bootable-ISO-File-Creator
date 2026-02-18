@@ -22,7 +22,7 @@ A lightweight Windows GUI tool for creating bootable ISO files from any folder �
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 1. **Windows OS** (Windows 10/11 recommended)
 2. **Windows ADK Deployment Tools** — The tool relies on `oscdimg.exe`, which is included with the [Windows Assessment and Deployment Kit (ADK)](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install).
@@ -88,6 +88,6 @@ Under the hood, the script calls Microsoft's `oscdimg.exe` with the following fl
 
 ---
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
