@@ -306,8 +306,8 @@ $btnCreate.Add_Click({
         $txtISO.Text = ""
         $txtBoot.Text = ""
         $txtOscdimg.Text = ""
-        $btnCreate.Text = "Create ISO"
-        $btnCreate.Font = New-Object System.Drawing.Font("Microsoft Sans Serif",8,[System.Drawing.FontStyle]::Regular)
+        $btnCreate.Text = "Completed!"
+        $btnCreate.Font = New-Object System.Drawing.Font("Microsoft Sans Serif",10,[System.Drawing.FontStyle]::Bold)
         $btnCreate.Enabled = $false
         $btnCreate.BackColor = [System.Drawing.Color]::LightGray
     } catch {
