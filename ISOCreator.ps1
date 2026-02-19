@@ -32,6 +32,18 @@ $form.Size = New-Object System.Drawing.Size(600,500)
 $form.StartPosition = "CenterScreen"
 $form.AllowDrop = $true
 
+# --- Author credit link (always visible at bottom-right) ---
+$lnkAuthor = New-Object System.Windows.Forms.LinkLabel
+$lnkAuthor.Text = "Kevin Coovi"
+$lnkAuthor.Location = New-Object System.Drawing.Point(480,435)
+$lnkAuthor.AutoSize = $true
+$lnkAuthor.LinkColor = [System.Drawing.Color]::RoyalBlue
+$lnkAuthor.Font = New-Object System.Drawing.Font("Microsoft Sans Serif",9,[System.Drawing.FontStyle]::Regular)
+$lnkAuthor.Add_LinkClicked({
+    Start-Process "https://github.com/kcoovi"
+})
+$form.Controls.Add($lnkAuthor)
+
 # --- Source folder ---
 $lblSource = New-Object System.Windows.Forms.Label
 $lblSource.Text = "Source Folder:"
@@ -286,9 +298,18 @@ $btnCreate.Add_Click({
         $progress.Style = 'Continuous'
         $progress.Value = 100
         Show-Status "Bootable ISO created at: $isoPath"
-        $btnCreate.Text = "Completed"
-        $btnCreate.Font = New-Object System.Drawing.Font("Microsoft Sans Serif",10,[System.Drawing.FontStyle]::Bold)
         $btnOpenFolder.Visible = $true
+
+        # --- Clear all fields after successful creation ---
+        $txtSource.Text = ""
+        $txtOutput.Text = ""
+        $txtISO.Text = ""
+        $txtBoot.Text = ""
+        $txtOscdimg.Text = ""
+        $btnCreate.Text = "Create ISO"
+        $btnCreate.Font = New-Object System.Drawing.Font("Microsoft Sans Serif",8,[System.Drawing.FontStyle]::Regular)
+        $btnCreate.Enabled = $false
+        $btnCreate.BackColor = [System.Drawing.Color]::LightGray
     } catch {
         $progress.Style = 'Continuous'
         $progress.Value = 0
