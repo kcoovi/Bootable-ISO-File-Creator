@@ -178,6 +178,9 @@ $progress.Style = 'Continuous'
 $progress.Value = 0
 $form.Controls.Add($progress)
 
+# --- Variable to hold output path for Open Folder button ---
+$script:lastOutputFolder = ""
+
 # --- Open Folder button (hidden until completion) ---
 $btnOpenFolder = New-Object System.Windows.Forms.Button
 $btnOpenFolder.Text = "Open Folder"
@@ -185,7 +188,7 @@ $btnOpenFolder.Location = New-Object System.Drawing.Point(230,360)
 $btnOpenFolder.Size = New-Object System.Drawing.Size(100,30)
 $btnOpenFolder.Visible = $false
 $btnOpenFolder.Add_Click({
-    Start-Process $txtOutput.Text
+    if ($script:lastOutputFolder -ne "") { Start-Process $script:lastOutputFolder }
 })
 $form.Controls.Add($btnOpenFolder)
 
@@ -300,7 +303,8 @@ $btnCreate.Add_Click({
         Show-Status "Bootable ISO created at: $isoPath"
         $btnOpenFolder.Visible = $true
 
-        # --- Clear all fields after successful creation ---
+        # --- Save output path, then clear all fields ---
+        $script:lastOutputFolder = $out
         $txtSource.Text = ""
         $txtOutput.Text = ""
         $txtISO.Text = ""
